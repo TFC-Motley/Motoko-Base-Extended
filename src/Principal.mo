@@ -1,17 +1,17 @@
-/// IC principals (user and canister smart contract IDs)
-import Prim "mo:⛔";
 import Blob "mo:base/Blob";
 import Iter "mo:base/Iter";
 import SB "mo:stableBuffer/StableBuffer";
 import RBT "mo:stableRBT/StableRBTree";
 import TrieSet "mo:base/TrieSet";
 import Principal "mo:base/Principal";
+import Hashmap "mo:hashmap/Map";
 
 
 module {
 
-  public type Principal = Prim.Types.Principal;
+  public type Principal = Principal.Principal;
   public type Tree<T> = RBT.Tree<Principal,T>;
+  public type Map<T> = Hashmap.Map<Principal,T>;
   public type Buffer = SB.StableBuffer<Principal>;
   public type Set = TrieSet.Set<Principal>;
 
@@ -19,6 +19,34 @@ module {
   public let Base = Principal;
   
   public func placeholder() : Principal { Base.fromText("aaaaa-aa") };
+
+  public let { phash } = Hashmap;
+
+  public module Map = {
+
+    public func init<T>() : Map<T> { Hashmap.new<Principal,T>(phash) };
+
+    public func has<T>( map : Map<T>, k : Principal ) : Bool { Hashmap.has(map, phash, k) };
+  
+    public func get<T>( map : Map<T>, k : Principal ) : ?T { Hashmap.get(map, phash, k) };
+
+    public func set<T>( map : Map<T>, k : Principal, v : T ) : () { Hashmap.set(map, phash, k, v) };
+
+    public func put<T>( map : Map<T>, k : Principal, v : T ) : ?T { Hashmap.put(map, phash, k, v) };
+
+    public func delete<T>( map : Map<T>, k : Principal ) : () { Hashmap.delete(map, phash, k) };
+
+    public func remove<T>( map : Map<T>, k : Principal ) : ?T { Hashmap.remove(map, phash, k) };
+
+    public func entries<T>( map : Map<T> ) : Iter.Iter<(Principal,T)> { Hashmap.entries<Principal,T>(map) };
+
+    public func keys<T>( map : Map<T> ) : Iter.Iter<Principal> { Hashmap.keys<Principal,T>(map) };
+
+    public func vals<T>( map : Map<T> ) : Iter.Iter<T> { Hashmap.vals<Principal,T>(map) };
+
+    public func size<T>( map : Map<T> ) : Nat { Hashmap.size(map) };
+
+  };
 
   public module Set = {
 

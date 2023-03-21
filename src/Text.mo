@@ -7,6 +7,7 @@ import Stack "mo:base/Stack";
 import Text "mo:base/Text";
 import Option "mo:base/Option";
 import TrieSet "mo:base/TrieSet";
+import Hashmap "mo:hashmap/Map";
 
 module {
 
@@ -21,6 +22,36 @@ module {
   public type LargeSet = RBT.Tree<Text,()>;
 
   public let Base = Text;
+
+  public type Map<T> = Hashmap.Map<Text,T>;
+  
+  public let { thash } = Hashmap;
+
+  public module Map = {
+
+    public func init<T>() : Map<T> { Hashmap.new<Text,T>(thash) };
+
+    public func has<T>( map : Map<T>, k : Text ) : Bool { Hashmap.has(map, thash, k) };
+  
+    public func get<T>( map : Map<T>, k : Text ) : ?T { Hashmap.get(map, thash, k) };
+
+    public func set<T>( map : Map<T>, k : Text, v : T ) : () { Hashmap.set(map, thash, k, v) };
+
+    public func put<T>( map : Map<T>, k : Text, v : T ) : ?T { Hashmap.put(map, thash, k, v) };
+
+    public func delete<T>( map : Map<T>, k : Text ) : () { Hashmap.delete(map, thash, k) };
+
+    public func remove<T>( map : Map<T>, k : Text ) : ?T { Hashmap.remove(map, thash, k) };
+
+    public func entries<T>( map : Map<T> ) : Iter.Iter<(Text,T)> { Hashmap.entries<Text,T>(map) };
+
+    public func keys<T>( map : Map<T> ) : Iter.Iter<Text> { Hashmap.keys<Text,T>(map) };
+
+    public func vals<T>( map : Map<T> ) : Iter.Iter<T> { Hashmap.vals<Text,T>(map) };
+
+    public func size<T>( map : Map<T> ) : Nat { Hashmap.size(map) };
+
+  };
 
   public module Set = {
 
