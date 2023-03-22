@@ -5,14 +5,14 @@ let Package =
     { name : Text, version : Text, repo : Text, dependencies : List Text }
 
 let additions = [
+  { name = "hashmap"
+  , repo = "https://github.com/ZhenyaUsenko/motoko-hash-map"
+  , version = "v8.0.0"
+  , dependencies = [] : List Text
+  },
   { name = "struct"
   , repo = "https://github.com/TFC-Motley/Structures"
   , version = "v0.0.1-alpha"
-  , dependencies = [] : List Text
-  },
-  { name = "base"
-  , repo = "https://github.com/dfinity/motoko-base"
-  , version = "moc-0.7.6"
   , dependencies = [] : List Text
   },
   { name = "base-0.7.3"

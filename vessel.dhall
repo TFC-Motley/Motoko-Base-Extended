@@ -1,1 +1,1 @@
-{ dependencies = [ "base", "crypto", "encoding", "base-0.7.3", "stableRBT", "stableBuffer", "struct" ], compiler = Some "0.7.3" }
+{ dependencies = [ "base", "crypto", "encoding", "base-0.7.3", "stableRBT", "stableBuffer", "hashmap", "struct" ], compiler = Some "0.8.5" }
