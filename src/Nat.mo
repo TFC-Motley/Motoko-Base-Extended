@@ -50,6 +50,8 @@ module {
 
     public func insert( set : Set, k : Nat) : () { Hashset.add(set, nhash, k) };
 
+    public func put( set : Set, k : Nat ) : Bool { Hashset.put(set, nhash, k) };
+
     public func delete( set : Set, k : Nat ) : () { Hashset.delete(set, nhash, k) };
 
     public func fromIter( iter : Iter.Iter<Nat> ) : Set { Hashset.fromIter(iter, nhash) };

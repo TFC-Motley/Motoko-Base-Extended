@@ -2,6 +2,8 @@ import Nat32 "mo:base/Nat32";
 import Iter "mo:base/Iter";
 import RBT "mo:stableRBT/StableRBTree";
 import Nat32Struct "mo:struct/Primitives/Nat32";
+import Hashmap "mo:hashmap/Map";
+import Hashset "mo:hashmap/Set";
 
 module {
 
@@ -10,6 +12,63 @@ module {
   public let Base = Nat32;
 
   public let Struct = Nat32Struct;
+
+  public type Set = Hashset.Set<Nat32>;
+
+  public type Map<T> = Hashmap.Map<Nat32,T>;
+  
+  public let { n32hash } = Hashmap;
+
+
+  public module Set = {
+
+    public func init() : Set { Hashset.new<Nat32>(n32hash) };
+
+    public func match( set : Set, k : Nat32 ) : Bool { Hashset.has(set, n32hash, k) };
+
+    public func insert( set : Set, k : Nat32) : () { Hashset.add(set, n32hash, k) };
+
+    public func put( set : Set, k : Nat32 ) : Bool { Hashset.put(set, n32hash, k) };
+
+    public func delete( set : Set, k : Nat32 ) : () { Hashset.delete(set, n32hash, k) };
+
+    public func fromIter( iter : Iter.Iter<Nat32> ) : Set { Hashset.fromIter(iter, n32hash) };
+
+    public func toArray( set : Set ) : [Nat32] { Hashset.toArray<Nat32>( set ) };
+
+    public func keys( set : Set ) : Iter.Iter<Nat32> { Hashset.keys(set) };
+
+    public func size( set : Set ) : Nat { Hashset.size(set) };
+
+  };
+
+
+  public module Map = {
+
+    public func init<T>() : Map<T> { Hashmap.new<Nat32,T>(n32hash) };
+
+    public func has<T>( map : Map<T>, k : Nat32 ) : Bool { Hashmap.has(map, n32hash, k) };
+  
+    public func get<T>( map : Map<T>, k : Nat32 ) : ?T { Hashmap.get(map, n32hash, k) };
+
+    public func set<T>( map : Map<T>, k : Nat32, v : T ) : () { Hashmap.set(map, n32hash, k, v) };
+
+    public func put<T>( map : Map<T>, k : Nat32, v : T ) : ?T { Hashmap.put(map, n32hash, k, v) };
+
+    public func delete<T>( map : Map<T>, k : Nat32 ) : () { Hashmap.delete(map, n32hash, k) };
+
+    public func remove<T>( map : Map<T>, k : Nat32 ) : ?T { Hashmap.remove(map, n32hash, k) };
+
+    public func entries<T>( map : Map<T> ) : Iter.Iter<(Nat32,T)> { Hashmap.entries<Nat32,T>(map) };
+
+    public func keys<T>( map : Map<T> ) : Iter.Iter<Nat32> { Hashmap.keys<Nat32,T>(map) };
+
+    public func vals<T>( map : Map<T> ) : Iter.Iter<T> { Hashmap.vals<Nat32,T>(map) };
+
+    public func size<T>( map : Map<T> ) : Nat { Hashmap.size(map) };
+
+  };
+
 
   public module Tree = {
 
