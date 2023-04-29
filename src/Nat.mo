@@ -34,6 +34,8 @@ module {
 
     public func entries<T>( map : Map<T> ) : Iter.Iter<(Nat,T)> { Hashmap.entries<Nat,T>(map) };
 
+    public func fromIter<T>( iter : { next: () -> ?(Nat,T) } ) : Map<T> { Hashmap.fromIter<Nat,T>(iter, nhash) };
+
     public func keys<T>( map : Map<T> ) : Iter.Iter<Nat> { Hashmap.keys<Nat,T>(map) };
 
     public func vals<T>( map : Map<T> ) : Iter.Iter<T> { Hashmap.vals<Nat,T>(map) };

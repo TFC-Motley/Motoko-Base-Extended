@@ -44,6 +44,8 @@ module {
     public func remove<T>( map : Map<T>, k : Text ) : ?T { Hashmap.remove(map, thash, k) };
 
     public func entries<T>( map : Map<T> ) : Iter.Iter<(Text,T)> { Hashmap.entries<Text,T>(map) };
+  
+    public func fromIter<T>( iter : { next: () -> ?(Text,T) } ) : Map<T> { Hashmap.fromIter<Text,T>(iter, thash) };
 
     public func keys<T>( map : Map<T> ) : Iter.Iter<Text> { Hashmap.keys<Text,T>(map) };
 
