@@ -42,6 +42,8 @@ module {
   
     public func fromIter<T>( iter : { next: () -> ?(Principal,T) } ) : Map<T> { Hashmap.fromIter<Principal,T>(iter, phash) };
 
+    public func find<T>( map : Map<T>, fn: (Principal, T) -> Bool ) : ?(Principal, T) { Hashmap.find<Principal,T>(map, fn) }; 
+
     public func keys<T>( map : Map<T> ) : Iter.Iter<Principal> { Hashmap.keys<Principal,T>(map) };
 
     public func vals<T>( map : Map<T> ) : Iter.Iter<T> { Hashmap.vals<Principal,T>(map) };

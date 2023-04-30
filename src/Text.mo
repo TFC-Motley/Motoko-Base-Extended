@@ -47,6 +47,8 @@ module {
   
     public func fromIter<T>( iter : { next: () -> ?(Text,T) } ) : Map<T> { Hashmap.fromIter<Text,T>(iter, thash) };
 
+    public func find<T>( map : Map<T>, fn: (Text, T) -> Bool ) : ?(Text, T) { Hashmap.find<Text,T>(map, fn) }; 
+
     public func keys<T>( map : Map<T> ) : Iter.Iter<Text> { Hashmap.keys<Text,T>(map) };
 
     public func vals<T>( map : Map<T> ) : Iter.Iter<T> { Hashmap.vals<Text,T>(map) };
